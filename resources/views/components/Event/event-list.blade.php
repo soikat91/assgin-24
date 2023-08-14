@@ -67,19 +67,20 @@
             // let editData=${'.edit'}
             // let deleteData=${'.delete'}
 
-            // $('.edit').on('click',async function(){
+            $('.edit').on('click',async function(){
 
-            //     let id=$(this).data('id');
-            //    await getExpenseId(id)
-            //     $('#update-modal').modal('show')
+                let id=$(this).data('id');
+                alert(id)
+                await eventID(id)
+                 $('#update-modal').modal('show')
                 
-            // })
+            })
 
             $('.delete').on('click',function(){
                 let id=$(this).data('id')
                 alert(id)
                  $('#delete-modal').modal('show')
-                // $('#incomeIdDelete').val(id)
+                $('#eventIdDelete').val(id)
 
             })
 

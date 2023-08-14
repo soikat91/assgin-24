@@ -39,6 +39,7 @@ Route::get('event-list',[EventController::class,'eventList'])->middleware([Token
 Route::post('event-create',[EventController::class,'eventCreate'])->middleware([TokenVerificationMiddleware::class]);
 Route::post('event-update',[EventController::class,'eventUpdate'])->middleware([TokenVerificationMiddleware::class]);
 Route::post('event-delete',[EventController::class,'eventDelete'])->middleware([TokenVerificationMiddleware::class]);
+Route::post('event-by-id',[EventController::class,'eventById'])->middleware([TokenVerificationMiddleware::class]);
 
 
 // page

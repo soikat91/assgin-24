@@ -10,24 +10,27 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-12 p-1">
-                                <label class="form-label">Category *</label>
-                                <input type="text" class="form-control" id="categoryUpdate" value="">
-                                <input type="hidden" class="form-control" id="incomeID">
-                            </div>
-                            <div class="col-12 p-1">
-                                <label class="form-label">Amount *</label>
-                                <input type="text" class="form-control" id="amountUpdate">
+                                <label class="form-label">Title *</label>
+                                <input type="text" class="form-control" id="titleUpdate">
+                                <input type="text" class="form-control" id="eventID">
                             </div>
                             <div class="col-12 p-1">
                                 <label class="form-label">Description *</label>
                                 <input type="text" class="form-control" id="descriptionUpdate">
+                            </div>
+                            <div class="col-12 p-1">
+                                <label class="form-label">time *</label>
+                                <input type="text" class="form-control" id="timeUpdate">
                             </div>
 
                             <div class="col-12 p-1">
                                 <label class="form-label">Date *</label>
                                 <input type="date" class="form-control" id="dateUpdate">
                             </div>
-                           
+                            <div class="col-12 p-1">
+                                <label class="form-label">Location *</label>
+                                <input type="text" class="form-control" id="locationUpdate">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -41,6 +44,22 @@
 </div>
 
 <script>
+
+
+
+        async function eventID(id){
+            document.getElementById('eventID').value=id
+            showLoader()
+            let res=await axios.post('/event-by-id',{id:id});
+            hideLoader()
+            document.getElementById('titleUpdate').value=res.data['title']
+            document.getElementById('descriptionUpdate').value=res.data['description']
+            document.getElementById('timeUpdate').value=res.data['time']
+            document.getElementById('dateUpdate').value=res.data['date']
+            document.getElementById('locationUpdate').value=res.data['location']
+
+
+        }
 
     // async function getExpenseId(id) {
 

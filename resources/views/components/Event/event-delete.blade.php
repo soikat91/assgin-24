@@ -13,7 +13,7 @@
             <div class="modal-footer justify-content-end">
                 <div>
                     <button type="button" id="model-close" class="btn shadow-sm btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button  type="button" id="confirmDelete" class="btn shadow-sm btn-danger" >Delete</button>
+                    <button onclick="deleleEvent()"  type="button" id="confirmDelete" class="btn shadow-sm btn-danger" >Delete</button>
                 </div>
             </div>
 
@@ -25,16 +25,16 @@
   
     async function deleleEvent(){
 
-        let incomeId=document.getElementById('eventIdDelete').value
+        let eventId=document.getElementById('eventIdDelete').value
 
         document.getElementById('model-close').click();
         showLoader()
-        let res=await axios.post('/event-delete',{id:incomeId})
+        let res=await axios.post('/event-delete',{id:eventId})
         hideLoader()
 
         if(res.data===1){
             successToast("Delete success")
-            await  ExpenseList()
+            await EventList()
         }else{
             errorToast("Faild Try Again")
         }

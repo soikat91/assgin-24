@@ -43,5 +43,15 @@
 
     </div>
 </div>
+<script>
+    TotalEvent()
 
+        async function TotalEvent(){
+
+            let res= await axios.get('/total-event')
+            document.getElementById('totalEvent').innerText=res.data
+
+        }
+
+</script>
 

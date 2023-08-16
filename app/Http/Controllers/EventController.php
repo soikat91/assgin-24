@@ -36,6 +36,8 @@ class EventController extends Controller
 
     }
 
+
+
     function eventUpdate(Request $request){
 
         $userId=$request->header('id');
@@ -63,5 +65,19 @@ class EventController extends Controller
         $userId=$request->header('id');
         $eventId=$request->input('id');
         return Event::where('id',$eventId)->where('user_id',$userId)->delete();
+    }
+
+    function eventShow(Request $request){
+
+        $userId=$request->header('id');
+        $eventId=$request->input('id');
+        return Event::where('id',$eventId)->where('user_id',$userId)->first();
+        
+    }
+
+
+    function totalEvent(Request $request){
+        $userId=$request->header('id');
+        return Event::where('user_id',$userId)->count();
     }
 }

@@ -40,6 +40,10 @@ Route::post('event-create',[EventController::class,'eventCreate'])->middleware([
 Route::post('event-update',[EventController::class,'eventUpdate'])->middleware([TokenVerificationMiddleware::class]);
 Route::post('event-delete',[EventController::class,'eventDelete'])->middleware([TokenVerificationMiddleware::class]);
 Route::post('event-by-id',[EventController::class,'eventById'])->middleware([TokenVerificationMiddleware::class]);
+Route::get('event-show',[EventController::class,'eventShow'])->middleware([TokenVerificationMiddleware::class]);
+
+
+Route::get('total-event',[EventController::class,'totalEvent'])->middleware([TokenVerificationMiddleware::class]);
 
 
 // page

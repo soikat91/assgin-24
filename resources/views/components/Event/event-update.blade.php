@@ -1,45 +1,47 @@
 
-<div class="modal" id="update-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-md">
-        <form id="updateData">
+<div class="modal animated zoomIn" id="update-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+       
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Update Expense</h5>
                 </div>
                 <div class="modal-body">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-12 p-1">
-                                <label class="form-label">Title *</label>
-                                <input type="text" class="form-control" id="titleUpdate">
-                                <input type="text" class="form-control" id="eventID">
-                            </div>
-                            <div class="col-12 p-1">
-                                <label class="form-label">Description *</label>
-                                <input type="text" class="form-control" id="descriptionUpdate">
-                            </div>
-                            <div class="col-12 p-1">
-                                <label class="form-label">time *</label>
-                                <input type="text" class="form-control" id="timeUpdate">
-                            </div>
+                    <form id="updateData">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12 p-1">
+                                    <label class="form-label">Title *</label>
+                                    <input type="text" class="form-control" id="titleUpdate">
+                                    <input type="text" class="form-control" id="eventID">
+                                </div>
+                                <div class="col-12 p-1">
+                                    <label class="form-label">Description *</label>
+                                    <input type="text" class="form-control" id="descriptionUpdate">
+                                </div>
+                                <div class="col-12 p-1">
+                                    <label class="form-label">time *</label>
+                                    <input type="text" class="form-control" id="timeUpdate">
+                                </div>
 
-                            <div class="col-12 p-1">
-                                <label class="form-label">Date *</label>
-                                <input type="date" class="form-control" id="dateUpdate">
-                            </div>
-                            <div class="col-12 p-1">
-                                <label class="form-label">Location *</label>
-                                <input type="text" class="form-control" id="locationUpdate">
+                                <div class="col-12 p-1">
+                                    <label class="form-label">Date *</label>
+                                    <input type="date" class="form-control" id="dateUpdate">
+                                </div>
+                                <div class="col-12 p-1">
+                                    <label class="form-label">Location *</label>
+                                    <input type="text" class="form-control" id="locationUpdate">
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button id="update-model-close" class="btn  btn-sm btn-danger" data-bs-dismiss="modal" aria-label="Close">Close</button>
-                    <button  type="submit" class="btn btn-sm  btn-success" >Update</button>
+                    <button onclick="eventUpdate()" type="submit" class="btn btn-sm  btn-success" >Update</button>
                 </div>
             </div>
-        </form>
+      
     </div>
 </div>
 
@@ -60,6 +62,57 @@
 
 
         }
+
+
+        async function eventUpdate(){
+
+            var titleUpdate=document.getElementById('titleUpdate').value
+            var descriptionUpdate=document.getElementById('descriptionUpdate').value
+            var timeUpdate=document.getElementById('timeUpdate').value
+            var dateUpdate=document.getElementById('dateUpdate').value
+            var locationUpdate=document.getElementById('locationUpdate').value
+            var eventID=document.getElementById('eventID').value
+
+            if(titleUpdate.length===0){
+                errorToast("Title Required")
+            }else if(descriptionUpdate.length===0){
+                errorToast("Description Required")
+            }else if(dateUpdate.length===0){
+                errorToast("Date Required")
+            }else if(timeUpdate.length===0){
+                errorToast("Time Required")
+            }else if(locationUpdate.length===0){
+                errorToast("Location Required")
+            }else{
+                
+              //  document.getElementById('update-modal-close').click();
+                showLoader()
+                let res=await axios.post('/event-update',{
+                    title:titleUpdate,
+                    description:descriptionUpdate,
+                    time:timeUpdate,
+                    date:dateUpdate,
+                    location:locationUpdate,
+                    id:eventID 
+                })
+                hideLoader();
+
+                if(res.data===1){
+                   
+                    $('#update-modal').trigger("reset")
+                    successToast('Update Success')
+                   
+                    await EventList()
+                }else{
+                    errorToast("Request Failed")
+                }
+            }
+
+            
+
+            
+        }
+
 
     // async function getExpenseId(id) {
 

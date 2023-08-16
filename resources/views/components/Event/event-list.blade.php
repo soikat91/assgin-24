@@ -56,8 +56,10 @@
                             <td>${item.location}</td>                 
                                             
                             <td>
+                                <button  data-id=${item.id} class="view btn btn-sm btn-outline-primary"> View</button> 
+                            
                                 <button data-id=${item.id} class="edit btn btn-sm btn-outline-primary"> Edit</button> 
-                                <button data-id=${item.id} class="delete btn btn-sm btn-outline-primary"> Delete</button>
+                                <button  data-id=${item.id} class="delete btn btn-sm btn-outline-primary"> Delete</button>
                             </td>                       
                         </tr>
                     `
@@ -67,10 +69,17 @@
             // let editData=${'.edit'}
             // let deleteData=${'.delete'}
 
+            $('.view').on('click',async function(){
+                
+                let id=$(this).data('id')
+               // alert(id)
+               await evenDetails(id)
+                $('#details-modal').modal('show')
+            })
             $('.edit').on('click',async function(){
 
                 let id=$(this).data('id');
-                alert(id)
+               // alert(id)
                 await eventID(id)
                  $('#update-modal').modal('show')
                 
@@ -78,7 +87,7 @@
 
             $('.delete').on('click',function(){
                 let id=$(this).data('id')
-                alert(id)
+               // alert(id)
                  $('#delete-modal').modal('show')
                 $('#eventIdDelete').val(id)
 
